@@ -5,12 +5,14 @@ Autor: Miguel Ángel González Arias (GAMA)
 
 Año: 2019
 
+
+
 ## Análisis de los reads
 
 
 ## Reconstrucción de los MAGs
 ste man 
 
-##Análisis de los MAGs
+## Análisis de los MAGs
 jojotl
 
