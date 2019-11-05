@@ -38,7 +38,8 @@ Conceptos para googlear:
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
 
-````bash
+```bash
+Esto es un ejemplo
 Binsanity -f . -l $fasta_file -c *lognorm* -p $P1 -m 4000 -x 1000 -v 400 -d 0.95 --log PASS1-log.txt -o PASS1;
 cd PASS1
 find . -size 0 -delete;
@@ -46,7 +47,7 @@ num=1; for file in *.fna; do
        mv "$file" "$(printf "PASS1-%u" $num).fna";
        num=$(($num+1));
 done
-````
+```
 
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
 
