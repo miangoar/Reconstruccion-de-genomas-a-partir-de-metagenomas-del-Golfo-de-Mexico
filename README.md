@@ -9,6 +9,7 @@ Aquí se describen todos los comandos realizados en la tesis de licenciatura "Re
 ![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
 
 Este repositorio está dirigido principalmente a todos aquellos que no tienen experiencia bioinformática alguna, así como a aquellos interesados en los comandos implementados en la realización de mi tesis de licenciatura. Si bien mi experiencia en el área no es marcada, al menos este recurso puede servir para aclarar algunos conceptos, ahorrarse tiempo y reproducir los análisis realizados en la tesis en sus trabajos. En de ser un entendido en el tema puedes saltar directamente a las secciones de análisis, si detectas errores, tienes dudas o quieres contribuir en este repositorio contáctame en gamamiguelangel@gmail.com.
+
 La bioinformática se hace principalmente en sistemas operativos Linux y la gran mayoría de software científico se deposita en repositorios como GitHub, aunque existen otros repositorios como Bitbucket o algunos otros pertenecientes a Universidades. La bioinformática debe seguir la filosofía de código abierto, pues permite conocer a detalle los análisis realizados en los estudios e incluso mejorarlos. Un buen ejemplo de esto es el proyecto implementado en el desarrollo de Anvi'o (https://github.com/merenlab/anvio) o el artículo “A new genomic blueprint of the human gut microbiota” cuyo código esta disponible en https://github.com/Finn-Lab/MGS-gut. 
 
 ### Sistemas operativos Linux, lenguaje de programación Bash, trabajo en servidores de cómputo y utilidades 
@@ -23,11 +24,18 @@ Otra herramienta extremadamente útil es CyberDuck (Patito) que es un protocolo 
 La gran mayoría de programas bioinformáticos corren en servidores (o equipos personales con buenos recursos; procesadores Inter Core i7 e i9, o AMD Ryzen7 y Ryzen9, tarjetas gráficas dedicadas, con discos duros de >1TB, discos de estado solido y sobre con >16GB de memoria RAM). Por dicha razón es necesario perder el miedo a administrarse mediante terminales y líneas de comando, por lo que tendrás que aprender y familiarizaste con comandos básicos de Bash: cd (change directory), mv (move), ls (list), rm (remove), cp (copy) o man (manual/ayuda). Aquí hay una liga a dichos comandos. https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes/Comandos_b%C3%A1sicos_de_una_shell
 
 
+Conceptos para googlear:
+	- Bash
+	- Sistemas de manejo de ventanas (X11/X-server)
+	- Protocolos de transferencia de archivos (FTP, por sus siglas en inglés)
+	- Comandos básicos en Bash
 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
 
+
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
+
 
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
 
