@@ -25,10 +25,10 @@ La gran mayoría de programas bioinformáticos corren en servidores (o equipos p
 
 
 Conceptos para googlear:
-	- Bash
-	- Sistemas de manejo de ventanas (X11/X-server)
-	- Protocolos de transferencia de archivos (FTP, por sus siglas en inglés)
-	- Comandos básicos en Bash
+- Bash
+- Sistemas de manejo de ventanas (X11/X-server)
+- Protocolos de transferencia de archivos (FTP, por sus siglas en inglés)
+- Comandos básicos en Bash
 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
