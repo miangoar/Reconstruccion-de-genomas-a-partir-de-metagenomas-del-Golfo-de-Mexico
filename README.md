@@ -7,7 +7,14 @@ Aquí se describen todos los comandos realizados en la tesis de licenciatura "Re
                     
                     
 ![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
-Este repositorio esta dirigido pricnipalemnte a todos aquelllos que no tienen experiencia bioinformatica alguna. Si bien mi experticio en el area no es marcado, al menos este recurso les puede servir para aclarar algunos conceptos y reproducir los analicisi realizados en la tesis "Reconstrucción de genomas a partir de metagenomas del Golfo de México" en sus trabajos
+Este repositorio esta dirigido pricnipalemnte a todos aquelllos que no tienen experiencia bioinformatica alguna, aunque tambieen esta dirigido a aquellos interesados en los coomandos imlementados en la realizacion de mi tesis de licenciatura. Si bien mi experticio en el area no es marcado, al menos este recurso les puede servir para aclarar algunos conceptos y reproducir los analicisi realizados en la tesis en sus trabajos.En caso de que tu seas un experto en el tema puedes saltar directamente a las secciones de analisis y si detectas errores, tienes dudas o quieres contribuir en este repositorio contactame en  gamamiguelangel@gmail.com.
+
+La bioinformatica se hace pricnipalemnte en sistemas operativos Linux y la gran mayoria de sofware cientifico se deposita en repositorios como GitHub, aunque existen otros repositorios como bitbucket o algunos otros pertenecientes a Universidades. La bioinformatica debe seguir la filosofia de codifo abierto, pues permite cocnocer a detalle los analisis realizados en los estuios e incluo mejorarlos. Un buen ejemplo de esto es el proyecto implementado en el desarrollo de Anvi'o (https://github.com/merenlab/anvio)
+
+Los sistemas operativos de Windows (Microfost) y macOS (Apple) cuentan con terminales que incluyen el lenguaje de rogramacion Bash
+
+el principal lenguaje implementado en los sistemas operativos linux
+https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes/Comandos_b%C3%A1sicos_de_una_shell
 
 
 
