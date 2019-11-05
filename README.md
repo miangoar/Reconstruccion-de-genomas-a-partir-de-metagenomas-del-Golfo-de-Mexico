@@ -23,6 +23,8 @@ Otra herramienta extremadamente útil es CyberDuck (Patito) que es un protocolo 
 
 La gran mayoría de programas bioinformáticos corren en servidores (o equipos personales con buenos recursos; procesadores Inter Core i7 e i9, o AMD Ryzen7 y Ryzen9, tarjetas gráficas dedicadas, con discos duros de >1TB, discos de estado solido y sobre con >16GB de memoria RAM). Por dicha razón es necesario perder el miedo a administrarse mediante terminales y líneas de comando, por lo que tendrás que aprender y familiarizaste con comandos básicos de Bash: cd (change directory), mv (move), ls (list), rm (remove), cp (copy) o man (manual/ayuda). Aquí hay una liga a dichos comandos. https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes/Comandos_b%C3%A1sicos_de_una_shell
 
+Realizar alias y como editar el bash_profile. Editores como nano, pico, micro y esas weas. 
+
 
 Conceptos para googlear:
 - Bash
