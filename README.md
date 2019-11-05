@@ -6,6 +6,7 @@ Aquí se describen todos los comandos realizados en la tesis de licenciatura "Re
 Autor: Miguel Ángel González Arias (GAMA)
 
 Año: 2019
+![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
