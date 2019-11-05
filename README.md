@@ -3,7 +3,7 @@
 # Reconstrucción de genomas a partir de metagenomas del Golfo de México
 Aquí se describen todos los comandos realizados en la tesis de licenciatura "Reconstrucción de genomas a partir de metagenomas del Golfo de México"
 
-                    Autor: Miguel Ángel González Arias (GAMA)                                 Año: 2019
+               Autor: Miguel Ángel González Arias (GAMA)                             Año: 2019
                     
                     
 ![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
@@ -11,9 +11,8 @@ Este repositorio esta dirigido pricnipalemnte a todos aquelllos que no tienen ex
 
 La bioinformatica se hace pricnipalemnte en sistemas operativos Linux y la gran mayoria de sofware cientifico se deposita en repositorios como GitHub, aunque existen otros repositorios como bitbucket o algunos otros pertenecientes a Universidades. La bioinformatica debe seguir la filosofia de codifo abierto, pues permite cocnocer a detalle los analisis realizados en los estuios e incluo mejorarlos. Un buen ejemplo de esto es el proyecto implementado en el desarrollo de Anvi'o (https://github.com/merenlab/anvio)
 
-Los sistemas operativos de Windows (Microfost) y macOS (Apple) cuentan con terminales que incluyen el lenguaje de rogramacion Bash
-
-el principal lenguaje implementado en los sistemas operativos linux
+# Breve introduccion a sistemas operativos Linux, lenguaje de programacion Bash y trabajo en servidores de computo
+Los sistemas operativos de Windows (Microfost) y macOS (Apple) cuentan con terminales que incluyen el lenguaje de rogramacion Bash, el cual el principal lenguaje implementado en los sistemas operativos linux. En el caso de los equipos de Apple, las terminales que implementan cuentan con una arquitectura (Kernel) basados en el sistema operativo UNIX, exactamente el mismo en el que se construye Linux. Por tanto, sus terminales incluyen los comandos y demas facilidades para interactuar entre ambos sitemas operativos. En el caso de Microsoft, recientemente (~2018) se han implementado terminales con Linux las cuales estan disponibles si cuntas con un equipo de 64Bits y windows 10. Puedes habilitar dicha terminal googleando "Habilitar la terminal de Bash en windows" 
 https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes/Comandos_b%C3%A1sicos_de_una_shell
 
 
