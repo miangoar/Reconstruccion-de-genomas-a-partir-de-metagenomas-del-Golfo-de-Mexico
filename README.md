@@ -9,12 +9,13 @@ Año: 2019
 
 
 
-## Análisis de los reads
+![1](https://user-images.githubusercontent.com/51969194/68169954-96cdde80-ff33-11e9-85a5-6c90c716227e.png)
 
 
-## Reconstrucción de los MAGs
-ste man 
+![2](https://user-images.githubusercontent.com/51969194/68169955-96cdde80-ff33-11e9-9842-6fc91631095a.png)
 
-## Análisis de los MAGs
-jojotl
+
+![3](https://user-images.githubusercontent.com/51969194/68169952-96354800-ff33-11e9-9e68-cd8a4ce46524.png)
+
+## :v a prro 
 
