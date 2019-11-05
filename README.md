@@ -11,9 +11,13 @@ Este repositorio esta dirigido pricnipalemnte a todos aquelllos que no tienen ex
 
 La bioinformatica se hace pricnipalemnte en sistemas operativos Linux y la gran mayoria de sofware cientifico se deposita en repositorios como GitHub, aunque existen otros repositorios como bitbucket o algunos otros pertenecientes a Universidades. La bioinformatica debe seguir la filosofia de codifo abierto, pues permite cocnocer a detalle los analisis realizados en los estuios e incluo mejorarlos. Un buen ejemplo de esto es el proyecto implementado en el desarrollo de Anvi'o (https://github.com/merenlab/anvio)
 
-# Breve introduccion a sistemas operativos Linux, lenguaje de programacion Bash y trabajo en servidores de computo
-Los sistemas operativos de Windows (Microfost) y macOS (Apple) cuentan con terminales que incluyen el lenguaje de rogramacion Bash, el cual el principal lenguaje implementado en los sistemas operativos linux. En el caso de los equipos de Apple, las terminales que implementan cuentan con una arquitectura (Kernel) basados en el sistema operativo UNIX, exactamente el mismo en el que se construye Linux. Por tanto, sus terminales incluyen los comandos y demas facilidades para interactuar entre ambos sitemas operativos. En el caso de Microsoft, recientemente (~2018) se han implementado terminales con Linux las cuales estan disponibles si cuntas con un equipo de 64Bits y windows 10. Puedes habilitar dicha terminal googleando "Habilitar la terminal de Bash en windows" 
+# Sistemas operativos Linux, lenguaje de programacion Bash, trabajo en servidores de computo y utilidades 
+
+Los sistemas operativos de Windows (Microfost) y macOS (Apple) cuentan con terminales que incluyen el lenguaje de programacion Bash, el cual el principal lenguaje implementado en los sistemas operativos linux. En el caso de los equipos de Apple, las terminales que implementan cuentan con una arquitectura (Kernel) basados en el sistema operativo UNIX, exactamente el mismo en el que se construye Linux. Por tanto, sus terminales incluyen los comandos y demas facilidades para interactuar entre ambos sitemas operativos. En el caso de Microsoft, recientemente (~2018) se han implementado terminales con Linux las cuales estan disponibles si cuntas con un equipo de 64Bits y windows 10. Puedes habilitar dicha terminal googleando "Habilitar la terminal de Bash en windows" o bien te recomiendo encarecidamente probar la terminal "MobaxTerm" (https://mobaxterm.mobatek.net/) la cual es toda una suite gratuita que incluye el interprete Bash e inluso puede usarse como programa portablee. 
+
+No hay de otra,  mucha de la bioinformatic se hace con programas que solo utilizan lineas de comando, por lo que es recomenabdle te familiarises con comandos basicos como: cd (change directory), mv (move), ls (list) o rm (remove). Aqui hay una liga a dichos comandos:
 https://es.wikibooks.org/wiki/El_Manual_de_BASH_Scripting_B%C3%A1sico_para_Principiantes/Comandos_b%C3%A1sicos_de_una_shell
+
 
 
 
