@@ -39,6 +39,30 @@ Conceptos para googlear:
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
 
 
+  python2.7 /usr/local/bin/Binsanity -f . -l $fasta_file -c *lognorm* -p $P1 -m 4000 -x 1000 -v 400 -d 0.95 --log PASS1-log.txt -o PASS1;
+  cd PASS1
+  find . -size 0 -delete;
+  num=1; for file in *.fna; do
+         mv "$file" "$(printf "PASS1-%u" $num).fna";
+         num=$(($num+1));
+  done
+  echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+  echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+  python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS1-checkm > PASS1-checkm_out;
+  python2.7 /usr/local/bin/checkm_analysis -checkM PASS1-checkm_out;
+  echo "##### Of these are #####" >> binning_results;
+  echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+  echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+  echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+  echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+  for file in low_completion/*.fna; do
+          cat "$file" >> high_redundancy/low_completion.fna;
+  done
+  mv strain*/*.fna high_redundancy
+  ls -lh  * > renamed_merged_bins_info.txt
+  cd high_redundancy
+
+
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
 
 ## :v a prro 
