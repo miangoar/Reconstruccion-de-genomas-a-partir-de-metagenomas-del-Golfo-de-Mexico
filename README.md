@@ -31,7 +31,7 @@ ssh -X usuario@IP_del_servidor
 
 Donde ssh es el comando que ejecuta el protocolo; -X es una opción del comando ssh que declara que también se inicie el X-server para desplegar contenido grafico en caso de que lo ocupes (para ver más opciones de cualquier comando usa: man comando, p. ej. man ssh); usuario es tu nombre en el servidor que previamente te asigno tu administrador de computo al crearte una “cuenta” dentro del servidor; IP_del_servidor es la dirección IP del servidor al que entraras.   
 
-### Trabajo en servidores,
+### Trabajo en servidores
 Al iniciar sesión en terminales de sistemas operativos Linux se inicializa la Shell, un programa que hace la conexión entre plataformas e interpreta los registros de tu teclado a líneas de comando de Bash (propiamente es mas complejo, pero para fines didácticos es suficiente). A su vez, la Shell toma registro de los protocolos de seguridad, la librerías, direcciones de archivos y archivos ejecutables para funcionar cada vez que inicias sesión.  En la Fig. 1 se indican los directorios que cualquier sistema de computo tiene que tener para funcionar y el tipo de archivos que hay en ellos. Usualmente el único en el que se tiene actividad en /home/usuario y el resto de los directorios deberá dejarse intacto pues su modificación podría afectar seriamente el funcionamiento del equipo de computo o servidor
 ![dir](https://user-images.githubusercontent.com/51969194/68442061-8b79ed80-0195-11ea-9e47-44c3315d6bc7.jpg)
 > https://linuxconfig.org/filesystem-basics
