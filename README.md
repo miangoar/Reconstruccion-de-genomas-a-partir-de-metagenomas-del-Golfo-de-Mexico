@@ -121,7 +121,7 @@ cd database && ls -lh
 -rwxrwxr-x 1 user user  22G Aug 30  2018 E03_SED010_1_R2.fastq
 ```
 
-Evalúa la calidad de los reads usando stats.pl
+Evalúa la calidad de los reads usando stats.pl. “basic_stats_out.txt” contiene la información de la calidad de las secuencias.  
 ```bash 
 cd ../reads 
 ls ../database/*R1* > r1_reads.txt && ls ../database/*R2* > r2_reads.txt
@@ -131,19 +131,17 @@ stats.pl reads_list.txt
 ls 
 > basic_stats_out.txt reads_list.txt stats.pl
 ```
-“basic_stats_out.txt” contiene la información de la calidad de las secuencias 
 
 
-Evalúa la calidad de los reads usando FastQC
+Evalúa la calidad de los reads usando FastQC.El directorio “FastQC_results” contiene los reportes de calidad (en formato .zip y .html) para los reads paired-end (R1 y R2) de cada uno de los seis metagenomas.
 ```bash 
 fastqc ../database/* -o /home/user/reads/FastQC_results
 ```
-El directorio “FastQC_results” contiene los reportes de calidad (en formato .zip y .html) para los reads paired-end (R1 y R2) de cada uno de los seis metagenomas
 
 
 Crea directorios para los metagenomas y ensambla los reads. Solo se ejemplifica como realizar el ensamble con Megahit (con sus tres presets) e IDBA-UD para el metagenoma A04MIL. Para el resto hay que modificar las rutas a los archivos.  
 ```bash
-cd ../assembly
+cd ../assemble
 mkdir A04MIL  A04SED D18SED A04MIN  D18MAX  E03SED #En ambos directorios (idba_ud y megahit)
 cd megahit/
 cd A04MIL
