@@ -91,7 +91,7 @@ https://www.youtube.com/watch?v=KytW151dpqU
 Github tutorial
 https://www.youtube.com/watch?v=cMfDNkA5cVM
 
-De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal.
+De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios. 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
 Ubica tu posición en el servidor y crea nuevos directorios
@@ -104,33 +104,33 @@ mkdir database reads assemble binnining rna_predition annotation scripts
 Asumimos que los seis metagenomas están en el directorio databases 
 ```bash
 cd database && ls -lh 
-total 213G
--rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R2.fastq
--rwxrwxr-x 1 lorenzo lorenzo 8.6G Aug 30  2018 A04_MIN_2_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo 8.6G Aug 30  2018 A04_MIN_2_R2.fastq
--rwxrwxr-x 1 lorenzo lorenzo  26G Aug 30  2018 A04_SED_1_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo  26G Aug 30  2018 A04_SED_1_R2.fastq
--rwxrwxr-x 1 lorenzo lorenzo 8.0G Aug 30  2018 D18_MAX_1_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo 8.0G Aug 30  2018 D18_MAX_1_R2.fastq
--rwxrwxr-x 1 lorenzo lorenzo  29G Aug 30  2018 D18_SED_1_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo  29G Aug 30  2018 D18_SED_1_R2.fastq
--rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R1.fastq
--rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R2.fastq
+> total 213G
+-rwxrwxr-x 1 user user  15G Aug 30  2018 A04_MIL_1_R1.fastq
+-rwxrwxr-x 1 user user  15G Aug 30  2018 A04_MIL_1_R2.fastq
+-rwxrwxr-x 1 user user 8.6G Aug 30  2018 A04_MIN_2_R1.fastq
+-rwxrwxr-x 1 user user 8.6G Aug 30  2018 A04_MIN_2_R2.fastq
+-rwxrwxr-x 1 user user 26G Aug 30  2018 A04_SED_1_R1.fastq
+-rwxrwxr-x 1 user user  26G Aug 30  2018 A04_SED_1_R2.fastq
+-rwxrwxr-x 1 user user 8.0G Aug 30  2018 D18_MAX_1_R1.fastq
+-rwxrwxr-x 1 user user 8.0G Aug 30  2018 D18_MAX_1_R2.fastq
+-rwxrwxr-x 1 user user  29G Aug 30  2018 D18_SED_1_R1.fastq
+-rwxrwxr-x 1 user user  29G Aug 30  2018 D18_SED_1_R2.fastq
+-rwxrwxr-x 1 user user  22G Aug 30  2018 E03_SED010_1_R1.fastq
+-rwxrwxr-x 1 user user  22G Aug 30  2018 E03_SED010_1_R2.fastq
 ```
 
 Evalúa la calidad de los reads usando stats.pl
 ```bash 
-$ cd ../reads 
-$ ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
-$ paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
-$ cp ../scripts /stats.pl . 
-$ stats.pl reads_list.txt 
-
-$ ls 
-basic_stats_out.txt reads_list.txt stats.pl
+cd ../reads 
+ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
+paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
+cp ../scripts /stats.pl . 
+stats.pl reads_list.txt 
+ls 
+> basic_stats_out.txt reads_list.txt stats.pl
 ```
 “basic_stats_out.txt” contiene la información de la calidad de las secuencias 
+
 
 Evalúa la calidad de los reads usando FastQC
 ```bash 
@@ -139,7 +139,23 @@ fastqc ../database/* -o /home/user/reads/FastQC_results
 El directorio “FastQC_results” contiene los reportes de calidad (en formato .zip y .html) para los reads paired-end (R1 y R2) de cada uno de los seis metagenomas
 
 
+Crea directorios para los metagenomas y ensambla los reads. Solo se ejemplifica como realizar el ensamble con Megahit (con sus tres presets) e IDBA-UD para el metagenoma A04MIL. Para el resto hay que modificar las rutas a los archivos.  
+```bash
+cd ../assembly
+mkdir A04MIL  A04SED D18SED A04MIN  D18MAX  E03SED #En ambos directorios (idba_ud y megahit)
+cd megahit/
+cd A04MIL
 
+# Con Megahit
+megahit -t 50 -1 ../../database/A04_MIL_1_R1.fastq -2 ../../database/A04_MIL_1_R2.fastq -o A04MIL_megahit_meta
+megahit --presets meta-large -t 50 -1 ../../database/A04_MIL_1_R1.fastq -2 ../../database/A04_MIL_1_R2.fastq -o A04MIL_megahit_large
+megahit --presets meta-sensitive -t 50 -1 ../../database/A04_MIL_1_R1.fastq -2 ../../database/A04_MIL_1_R2.fastq -o A04MIL_megahit_sensitive
+
+# Con IDBA-UD. IDBA necesita de un preprocesamiento de los reads para ensamblarlos. Además, por defecto esta configurado para solo aceptar reads <100pb. Esta limitante puede configurarse modificando el parámetro “kMaxShortSequence” dentro del script short_sequence.h de la paquetería de IDBA-UD. Para más detalles consulta el manual. 
+
+fq2fa --merge ../../database/A04_MIL_1_R1.fastq ../../database/A04_MIL_1_R2.fastq A04MIL_reads_idba_input.fa
+idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
+```
 
 
 
