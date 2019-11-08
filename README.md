@@ -170,7 +170,7 @@ idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
 Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo:
-                           A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
+> A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
 
 Para los siguientes procedimientos (específicamente, el coensamble con Minimus2) es necesario renombrar los encabezados de cada uno de los contigs para cada archivo fasta. 24 archivos en total (6 metagenomas x 4 archivos fasta). 
 ```bash
@@ -191,18 +191,34 @@ CCTTTAAGCCACCTCCCGCTTT...
 # A este otro:
 >A04MIL_megahit_large.fa_k93_32 flag=1 multi=3.0000 len=298
 CCTTTAAGCCACCTCCCGCTTT...
+```
+
+Ordena los contigs con los encabezados renombrados de acuerdo con su procedencia (agua o sedimentos) y combina los archivos de acuerdo a su procedencia (Megahit o IDBA).   
+```bash
+mkdir water sediments
+mv *A04MIL* *A04MIN* *D18MAX* water
+mv *SED* sediments
+
+cd water
+cat *meta* > water_meta_primary_contigs.fa
+cat *large* > water_large_primary_contigs.fa
+cat *sensitive* > water_sensitive_primary_contigs.fa
+cat *idba* > water_idba_primary_contigs.fa
+cd ../sediments
+cat *meta* > sediments_meta_primary_contigs.fa
+cat *large* > sediments_large_primary_contigs.fa
+cat *sensitive* > sediments_sensitive_primary_contigs.fa
+cat *idba* > sediments_idba_primary_contigs.fa
+```
+
+
+Evalúa la calidad del ensamble usando Quast. “primary_contigs_stats_by_quast” es el directorio donde se encuentran los reportes estadísticos de los ensambles.  
+```bash
+quast.py -o primary_contigs_stats_by_quast -m 0 -t 20 *primary*
+```
+
 
 ### Binning
-
-```
-
-
-
-
-Evalúa la calidad del ensamble usando Quast 
-```bash
-
-```
 
 
 
