@@ -91,9 +91,11 @@ https://www.youtube.com/watch?v=KytW151dpqU
 Github tutorial
 https://www.youtube.com/watch?v=cMfDNkA5cVM
 
-De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios. 
+
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
+***De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios***
+
 Ubica tu posición en el servidor y crea nuevos directorios
 ```bash
 pwd 
@@ -122,7 +124,7 @@ cd database && ls -lh
 Evalúa la calidad de los reads usando stats.pl
 ```bash 
 cd ../reads 
-ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
+ls ../database/*R1* > r1_reads.txt && ls ../database/*R2* > r2_reads.txt
 paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
 cp ../scripts /stats.pl . 
 stats.pl reads_list.txt 
