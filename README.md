@@ -94,7 +94,7 @@ https://www.youtube.com/watch?v=cMfDNkA5cVM
 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
-***De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios***
+**De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios**
 
 Ubica tu posición en el servidor y crea nuevos directorios
 ```bash
@@ -128,6 +128,7 @@ ls ../database/*R1* > r1_reads.txt && ls ../database/*R2* > r2_reads.txt
 paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
 cp ../scripts /stats.pl . 
 stats.pl reads_list.txt 
+
 ls 
 > basic_stats_out.txt reads_list.txt stats.pl
 ```
@@ -139,6 +140,9 @@ fastqc ../database/* -o /home/user/reads/FastQC_results
 ```
 
 
+
+
+![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
 Crea directorios para los metagenomas y ensambla los reads. Solo se ejemplifica como realizar el ensamble con Megahit (con sus tres presets) e IDBA-UD para el metagenoma A04MIL. Para el resto hay que modificar las rutas a los archivos.  
 ```bash
 cd ../assemble
@@ -152,30 +156,15 @@ megahit --presets meta-large -t 50 -1 ../../database/A04_MIL_1_R1.fastq -2 ../..
 megahit --presets meta-sensitive -t 50 -1 ../../database/A04_MIL_1_R1.fastq -2 ../../database/A04_MIL_1_R2.fastq -o A04MIL_megahit_sensitive
 
 # Con IDBA-UD. IDBA necesita de un preprocesamiento de los reads para ensamblarlos. Además, por defecto esta configurado para solo aceptar reads <100pb. Esta limitante puede configurarse modificando el parámetro “kMaxShortSequence” dentro del script short_sequence.h de la paquetería de IDBA-UD. Para más detalles consulta el manual. 
-
 fq2fa --merge ../../database/A04_MIL_1_R1.fastq ../../database/A04_MIL_1_R2.fastq A04MIL_reads_idba_input.fa
 idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
+Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo: A04MIL_megahit_ meta.fa A04MIL_megahit_large.fa A04MIL_megahit_sensitive.fa A04MIL_idba.fa. 
 
 
-![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
 
-```bash
-Esto es un ejemplo
-Binsanity -f . -l $fasta_file -c *lognorm* -p $P1 -m 4000 -x 1000 -v 400 -d 0.95 --log PASS1-log.txt -o PASS1;
-cd PASS1
-find . -size 0 -delete;
-num=1; for file in *.fna; do
-       mv "$file" "$(printf "PASS1-%u" $num).fna";
-       num=$(($num+1));
-done
-```
-```bash
-```
 
-```bash
-```
 
 ```bash
 ```
