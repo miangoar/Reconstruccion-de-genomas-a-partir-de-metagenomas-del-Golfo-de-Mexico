@@ -309,24 +309,312 @@ cd high_redundancy
 find . -size 0 -delete
 
 ##################### Binning 2
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity -f . -l "$file" -c ../../*lognorm* -p $P2 -m 4000 -v 400 -d 0.95 --log PASS2-log.txt -o ../../PASS2;
+done
+cd ../../PASS2
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS2-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS2-checkm > PASS2-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS2-checkm_out;
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
 
 ##################### Refinamiento 2
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R2 --log PASS2-refine-log.txt -o ../../PASS2-refine;
+done
+cd ../../PASS2-refine
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS2-refine-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS .  PASS2-refine-checkm > PASS2-refine-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS2-refine-checkm_out
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
 
 ##################### Binning 3
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity -f . -l "$file" -c ../../*lognorm* -p $P3 -m 4000 -v 400 -d 0.95 --log PASS3-log.txt -o ../../PASS3;
+done
+cd ../../PASS3
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS3-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS3-checkm > PASS3-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS3-checkm_out;
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
+
 ##################### Refinamiento 3
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R3 --log PASS3-refine-log.txt -o ../../PASS3-refine;
+done
+cd ../../PASS3-refine
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS3-refine-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS .  PASS3-refine-checkm > PASS3-refine-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS3-refine-checkm_out
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
 
 ##################### Binning 4
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity -f . -l "$file" -c ../../*lognorm* -p $P4 -m 4000 -v 400 -d 0.95 --log PASS4-log.txt -o ../../PASS4;
+done
+cd ../../PASS4
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS4-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS4-checkm > PASS4-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS4-checkm_out;
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
+
 ##################### Refinamiento 4
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R4 --log PASS4-refine-log.txt -o ../../PASS4-refine;
+done
+cd ../../PASS4-refine
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS4-refine-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS .  PASS4-refine-checkm > PASS4-refine-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS4-refine-checkm_out;
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
 
 ##################### Binning 5
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity -f . -l "$file" -c ../../*lognorm* -p $P5 -m 4000 -v 400 -d 0.95 --log PASS5-log.txt -o ../../PASS5;
+done
+cd ../../PASS5
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS5-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS5-checkm > PASS5-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS5-checkm_out;
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
+
 ##################### Refinamiento 5
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R5 --log PASS5-refine-log.txt -o ../../PASS5-refine;
+done
+cd ../../PASS5-refine
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS5-refine-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS .  PASS5-refine-checkm > PASS5-refine-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS5-refine-checkm_out
+echo "##### Of these are #####" >> binning_results;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
 
 ##################### Binning 6
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity -f . -l "$file" -c ../../*lognorm* -p $P6 -m 4000 -v 400 -d 0.95 --log PASS6-log.txt -o ../../PASS6;
+done
+cd ../../PASS6
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS6-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS6-checkm > PASS6-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS6-checkm_out;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
+
 ##################### Refinamiento 6
+for file in *.fna; do
+        python2.7 /usr/local/bin/Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R6 --log PASS6-refine-redundant-pref10-log.txt -o ../../PASS6-refine-redundant-pref10;
+done
+cd ../../PASS6-refine-redundant-pref10;
+find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS6-refine-redundant-%u" $num).fna"
+       num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . PASS6-refine-redundant-checkm > PASS6-refine-redundant-checkm_out
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS6-refine-redundant-checkm_out;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
 
 ##################### Refinamiento 7
+for file in *.fna ; do
+        python2.7 /usr/local/bin/Binsanity-refine -f . -l "$file" -p $R7 -c ../../*lognorm --log PASS6-refine-redundant-2-pref3-log.txt -o ../../PASS6-refine-2-redundant-pref3;
+done
+cd ../../PASS6-refine-2-redundant-pref3
+num=1;  for file in *.fna; do
+        mv "$file" "$(printf "PASS6-refine-redundant-2-%u" $num).fna"
+        num=$(($num+1));
+done
+echo "##### Total new bins #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+echo "##### List of new bins #####" >> binning_results; ls -1 *.fna >> binning_results;
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS .  PASS6-refine-redundant-2-checkm > PASS6-refine-redundant-2-checkm_out;
+python2.7 /usr/local/bin/checkm_analysis -checkM PASS6-refine-redundant-2-checkm_out;
+echo "--> high_redundancy" >> binning_results; ls -1 high_redundancy/*.fna | wc -l >> binning_results;ls -1 high_redundancy/*.fna >> binning_results;
+echo "--> high_completion" >> binning_results; ls -1 high_completion/*.fna | wc -l >> binning_results; ls -1 high_completion/*.fna >> binning_results;
+echo "--> low_completion" >> binning_results;  ls -1 low_completion/*.fna | wc -l >> binning_results;  ls -1 low_completion/*.fna >> binning_results;
+echo "--> strain_redundancy" >> binning_results; ls -1 strain_redundancy/*.fna | wc -l >> binning_results;  ls -1 strain_redundancy/*.fna >> binning_results;
+cd ../
 
-##################### Refinamiento 8
+##################### Directorios finales
+mkdir FINAL-HIGH-COMPLETION FINAL-LOW-COMPLETION FINAL-HIGH-REDUNDANCY
+# For Hi-C bins
+cp PASS*/high_completion/*.fna FINAL-HIGH-COMPLETION
+# For Low-C bins
+cp PASS6-refine-redundant-pref10/low_completion/*.fna FINAL-LOW-COMPLETION/
+cp PASS6-refine-2-redundant-pref3/low_completion/*.fna FINAL-LOW-COMPLETION/
+# For H-Red bins
+cp PASS6-refine-2-redundant-pref3/high_redundancy/*.fna FINAL-HIGH-REDUNDANCY/
+
+cd FINAL-HIGH-COMPLETION
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . high_completion-checkm > high_completion-checkm_out
+echo "##### Total Hi-C BINS #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+
+cd ../FINAL-LOW-COMPLETION
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . low_completion-checkm > low_completion-checkm_out
+echo "##### Total LOW-C BINS #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+
+cd ../FINAL-HIGH-REDUNDANCY
+python2.7 /usr/local/bin/checkm lineage_wf -x fna -t $NUCLEOS . high-redundancy-checkm > high-redundancy-checkm_out
+echo "##### Total TOTAL HI-R #####" > binning_results; ls -1 *.fna | wc -l >> binning_results;
+
+
 
 ```
 
