@@ -139,7 +139,16 @@ Evalúa la calidad de los reads usando FastQC.El directorio “FastQC_results”
 fastqc ../database/* -o /home/user/reads/FastQC_results
 ```
 
+Identifica la taxonomía de los reads con Kraken2 usando la base de datos nt. Solo se ejemplifica el metagenoma A04MIL
+```bash 
+mkdir kraken2 && cd kraken2
+mkdir A04MIL A04SED D18SED A04MIN D18MAX E03SED
+cd A04MIL
+kraken2 --db /home/kraken2/nt_DB/ --threads 20 --report A04MIL.report --use-names --paired /home/user/database/A04_MIL_1_R1.fastq /home/user/database/A04_MIL_1_R2.fastq 2> A04MIL.out
 
+# /home/kraken2/nt_DB/ es la base de datos nt "Krakenizada". Los usuarios pueden construir sus propias bases de datos. Consulta el manual de Kraken2.  
+```
+Todos los archivos .report generados con Kraken2 contienen los reportes de la taxonomía y abundancia de los reads. Estos archivos puedes visualizarlos en el servidor de Pavian (https://fbreitwieser.shinyapps.io/pavian/) . Considera que el servidor ofrece un límite de tamaño a procesar y de excederlo hay que ejecutar Pavian de forma local, por lo que tendrás que instalarlo en Rstudio y modificar los parámetros para aumentar el tamaño de los archivos de entrada. 
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
@@ -161,7 +170,7 @@ idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
 Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo:
-> A04MIL_megahit_meta.fa  A04MIL_megahit_large.fa A04MIL_megahit_sensitive.fa A04MIL_idba.fa. 
+> A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
 
 
 
