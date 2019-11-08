@@ -132,7 +132,15 @@ basic_stats_out.txt reads_list.txt stats.pl
 ```
 “basic_stats_out.txt” contiene la información de la calidad de las secuencias 
 
-Evalúa la calidad de los reads usando FASSTQC
+Evalúa la calidad de los reads usando FastQC
+```bash 
+fastqc ../database/* -o /home/user/reads/FastQC_results
+```
+El directorio “FastQC_results” contiene los reportes de calidad (en formato .zip y .html) para los reads paired-end (R1 y R2) de cada uno de los seis metagenomas
+
+
+
+
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
