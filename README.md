@@ -92,8 +92,38 @@ Github tutorial
 https://www.youtube.com/watch?v=cMfDNkA5cVM
 
 
-
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
+Ubica tu posición en el servidor y crea nuevos directorios
+```bash
+$ pwd 
+/home/user/
+$ mkdir database reads assemble binnining rna_predition annotation scripts
+```
+
+Asumimos que los seis metagenomas están en el directorio databases 
+Cd database && ls -lh 
+total 213G
+-rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R2.fastq
+-rwxrwxr-x 1 lorenzo lorenzo 8.6G Aug 30  2018 A04_MIN_2_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo 8.6G Aug 30  2018 A04_MIN_2_R2.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  26G Aug 30  2018 A04_SED_1_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  26G Aug 30  2018 A04_SED_1_R2.fastq
+-rwxrwxr-x 1 lorenzo lorenzo 8.0G Aug 30  2018 D18_MAX_1_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo 8.0G Aug 30  2018 D18_MAX_1_R2.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  29G Aug 30  2018 D18_SED_1_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  29G Aug 30  2018 D18_SED_1_R2.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R1.fastq
+-rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R2.fastq
+
+Evalúa la calidad de los reads usando stats.pl 
+Cd ../reads 
+Ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
+Paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
+Cp ../scripts /stats.pl . 
+
+
+
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
 
 ```bash
@@ -106,7 +136,14 @@ num=1; for file in *.fna; do
        num=$(($num+1));
 done
 ```
+```bash
+```
 
+```bash
+```
+
+```bash
+```
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
 
 ## :v a prro 
