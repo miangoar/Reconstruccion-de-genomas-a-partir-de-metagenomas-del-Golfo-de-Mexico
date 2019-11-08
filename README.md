@@ -169,26 +169,25 @@ idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
 Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo:
-> A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
+                A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
 
-Para los siguientes procedimientos (específicamente, coensamble con Minimus2) es necesario renombrar los encabezados de cada uno de los contigs para cada archivo fasta.
-24 archivos en total (6 metagenomas x 4 archivos fasta). 
-
+Para los siguientes procedimientos (específicamente, el coensamble con Minimus2) es necesario renombrar los encabezados de cada uno de los contigs para cada archivo fasta. 24 archivos en total (6 metagenomas x 4 archivos fasta). 
 ```bash
 cd ../  && pwd 
 > /home/user/assemble/
 
-mkdir renamed_contigs # Directorio con ligas simbólicas a todos los fasta 
+mkdir renamed_contigs && cd renamed_contigs # Directorio con ligas simbólicas a todos los fasta 
 ln -s ../A04MIL/A04MIL_megahit_meta/A04MIL_megahit_large.fa . # Hacerlo para cada uno de los 24 archivos.  
 
 ls *.fa > contigs_list.txt
-while read line; do (sed 's/>contig/>'$line'_contig/g' $line > $line.mod.fa); done <lista_fasta.txt
+while read line; do (sed 's/>/>'$line'_contig/g' $line > $line_mod.fa); done <lista_fasta.txt
 
 
-
+#De esta forma para cada archivo fasta enlistado dentro de  “contigs_list.txt” se registra el encabezado de cada uno de los contigs, si inicia con “>” se sustituye por el nombre del archivo fasta del que se está leyendo (por ejemplo, A04MIL_megahit_large.fa) y todos estos contigs renombrados se almacenan en archivos con terminación “_mod.fa” (por ejemplo, A04MIL_megahit_large.fa_mod.fa).  Tal vez no sea la mejor forma de realizar esta tarea, pero funciona. Asi, pasamos a gener encabezados de este tipo:
 >k93_32 flag=1 multi=3.0000 len=298
 CCTTTAAGCCACCTCCCGCTTT...
 
+# A este otro:
 >A04MIL_megahit_large.fa_k93_32 flag=1 multi=3.0000 len=298
 CCTTTAAGCCACCTCCCGCTTT...
 
