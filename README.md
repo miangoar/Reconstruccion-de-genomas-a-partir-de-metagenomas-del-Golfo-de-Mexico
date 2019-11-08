@@ -193,7 +193,7 @@ CCTTTAAGCCACCTCCCGCTTT...
 CCTTTAAGCCACCTCCCGCTTT...
 ```
 
-Ordena los contigs con los encabezados renombrados de acuerdo con su procedencia (agua o sedimentos) y combina los archivos de acuerdo a su procedencia (Megahit o IDBA).   
+Ordena los contigs con los encabezados renombrados de acuerdo con su procedencia (agua o sedimentos) y combina los archivos de acuerdo a su procedencia (Megahit o IDBA). Evalúa la calidad del ensamble usando Quast. “primary_contigs_stats_by_quast” es el directorio donde se encuentran los reportes estadísticos de los ensambles.   
 ```bash
 mkdir water sediments
 mv *A04MIL* *A04MIN* *D18MAX* water
@@ -204,21 +204,40 @@ cat *meta* > water_meta_primary_contigs.fa
 cat *large* > water_large_primary_contigs.fa
 cat *sensitive* > water_sensitive_primary_contigs.fa
 cat *idba* > water_idba_primary_contigs.fa
+quast.py -o primary_contigs_stats_by_quast -m 0 -t 20 *primary*
+
 cd ../sediments
 cat *meta* > sediments_meta_primary_contigs.fa
 cat *large* > sediments_large_primary_contigs.fa
 cat *sensitive* > sediments_sensitive_primary_contigs.fa
 cat *idba* > sediments_idba_primary_contigs.fa
-```
-
-
-Evalúa la calidad del ensamble usando Quast. “primary_contigs_stats_by_quast” es el directorio donde se encuentran los reportes estadísticos de los ensambles.  
-```bash
 quast.py -o primary_contigs_stats_by_quast -m 0 -t 20 *primary*
 ```
 
-
 ### Binning
+Con estos metagenomas, Megahit --present-sensitive tuvo un mejor rendimiento y por ello se trabaja con tales contigs. Crea directorios y ligas simbólicas para realizar el coensamble con Minimus2. 
+
+```bash
+cd && pwd 
+> /home/usuario
+mkdir assemble/coassemble
+cd assemble/coassemble
+ln -s ../assemble/water/water_sensitive_primary_contigs.fa . 
+ln -s ../assemble/sediments/sediments_sensitive_primary_contigs.fa .
+mkdir water sediments
+mv *sed* sediments && mv *water* water
+cd water 
+
+# Preprocesamiento para coensamblar los contigs
+toAmos -s water_sensitive_primary_contigs.fa -o water_sensitive_primary_contigs_input_2_minimus2.afg
+minimus2 water_sensitive_primary_contigs_input_2_minimus2.afg -D OVERLAP=100 MINID=95
+
+# Minimus2 genera varios resultados, los que nos interesa combinar son los contigs coensamblados (.fasta) y los singletones (.singletons.seq)
+cat *input_2_minimus2.fasta *input_2_minimus2.singletons.seq > water_secondary_contigs.fa  
+# Hacer lo propio para los contigs de sedimentos para generar un archivo sediment_secondary_contigs.fa
+```
+
+
 
 
 
