@@ -147,7 +147,7 @@ kraken2 --db /home/kraken2/nt_DB/ --threads 20 --report A04MIL.report --use-name
 
 # /home/kraken2/nt_DB/ es la base de datos nt "Krakenizada". Los usuarios pueden construir sus propias bases de datos. Consulta el manual de Kraken2.  
 ```
-Todos los archivos .report generados con Kraken2 contienen los reportes de la taxonomía y abundancia de los reads. Estos archivos puedes visualizarlos en el servidor de Pavian (https://fbreitwieser.shinyapps.io/pavian/) . Considera que el servidor ofrece un límite de tamaño a procesar y de excederlo hay que ejecutar Pavian de forma local (https://github.com/fbreitwieser/pavian), por lo que tendrás que instalarlo en Rstudio y modificar los parámetros para aumentar el tamaño de los archivos de entrada.  
+Todos los archivos .report generados con Kraken2 contienen los reportes de la taxonomía y abundancia de los reads. Estos archivos puedes visualizarlos en el servidor de Pavian (https://fbreitwieser.shinyapps.io/pavian/) . Considera que el servidor ofrece un límite de tamaño a procesar y de excederlo hay que ejecutar Pavian de forma local, por lo que tendrás que instalarlo en Rstudio y modificar los parámetros para aumentar el tamaño de los archivos de entrada (https://github.com/fbreitwieser/pavian).  
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
