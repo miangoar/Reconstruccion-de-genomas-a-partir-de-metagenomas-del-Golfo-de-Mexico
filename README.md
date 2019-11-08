@@ -151,6 +151,7 @@ Todos los archivos .report generados con Kraken2 contienen los reportes de la ta
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
+### Ensamble
 Crea directorios para los metagenomas y ensambla los reads. Solo se ejemplifica como realizar el ensamble con Megahit (con sus tres presets) e IDBA-UD para el metagenoma A04MIL. Para el resto hay que modificar las rutas a los archivos.  
 ```bash
 cd ../assemble
@@ -169,7 +170,7 @@ idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
 Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo:
-                A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
+                           A04MIL_megahit_meta.fa     A04MIL_megahit_large.fa    A04MIL_megahit_sensitive.fa    A04MIL_idba.fa. 
 
 Para los siguientes procedimientos (específicamente, el coensamble con Minimus2) es necesario renombrar los encabezados de cada uno de los contigs para cada archivo fasta. 24 archivos en total (6 metagenomas x 4 archivos fasta). 
 ```bash
@@ -190,6 +191,8 @@ CCTTTAAGCCACCTCCCGCTTT...
 # A este otro:
 >A04MIL_megahit_large.fa_k93_32 flag=1 multi=3.0000 len=298
 CCTTTAAGCCACCTCCCGCTTT...
+
+### Binning
 
 ```
 
