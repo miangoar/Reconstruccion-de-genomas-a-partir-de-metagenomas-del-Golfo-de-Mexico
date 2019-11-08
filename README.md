@@ -94,7 +94,7 @@ https://www.youtube.com/watch?v=cMfDNkA5cVM
 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
-**De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios**
+**De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal. El simbolo "#" representa comentarios. Además, antes de ejecutar cualquier programa deveras consultar el menú de ayuda (-h) o el manual para conocer los parámetros que se emplean**
 
 Ubica tu posición en el servidor y crea nuevos directorios
 ```bash
@@ -160,7 +160,8 @@ fq2fa --merge ../../database/A04_MIL_1_R1.fastq ../../database/A04_MIL_1_R2.fast
 idba_ud -r A04MIL_reads_idba_input.fa -o A04MI_idba
 ```
 
-Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo: A04MIL_megahit_ meta.fa A04MIL_megahit_large.fa A04MIL_megahit_sensitive.fa A04MIL_idba.fa. 
+Para ambos ensambladores, el parámetro “-o” declara el nombre de los directorios donde se imprimen los resultados. Ambos están basados en Gráficos de Brujin e iteran las longitudes de kmers, realizando contigs basados en diferentes longitudes de kmers para finalmente optimizar los resultados al final. Dentro del directorio de resultados de Megahit se crea un directorio llamado “intermediate_contigs”, el cual contiene los ensambles para cada longitud de kmer. Es bastante recomendable eliminar este directorio debido a que almacena bastante información (en GB) que no es realmente útil para nuestros fines al menos que se quiera analizar a detalle el ensamble. El archivo con los contigs que nos debe importar es “final.contigs.fa” el cual se construye a partir de la optimización de los contigs dentro del directorio intermediate_contigs. De forma similar, en IDBA el único archivo que nos importa es “contig.fa” el cual contiene los contigs optimizados. Es recomendable no eliminar los archivos con información del proceso (logs). En total por cada metagenoma se deben tener cuatro archivos fasta con los contigs los cuales se deberán renombrar de acuerdo con su procedencia, por ejemplo:
+> A04MIL_megahit_meta.fa  A04MIL_megahit_large.fa A04MIL_megahit_sensitive.fa A04MIL_idba.fa. 
 
 
 
