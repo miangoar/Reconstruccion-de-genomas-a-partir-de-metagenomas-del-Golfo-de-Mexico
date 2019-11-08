@@ -246,10 +246,7 @@ ln -s /home/assemble/coassemble/sediments/sediment_secondary_contigs.fa sediment
 cd water 
 
 bowtie2-build *secondary_contigs.fa water_secondary_contigs_index # Preprocesamiento (indexar)
-bowtie2 -x /home/user/mapping/water/water_secondary_contigs_index --very-sensitive --end-to-end --no-unal -q --threads 20 \
--1 /home/user/database/A04_MIL_1_R1.fastq,/home/user/database/A04_MIN_2_R1.fastq,/home/user/database/D18_MAX_1_R1.fastq  \
--2 /home/user/database/A04_MIL_1_R2.fastq,/home/user/database/A04_MIN_2_R2.fastq,/home/user/database/D18_MAX_1_R2.fastq \
--S water_RAW.sam; # Mapea los contigs contra los metagenomas
+bowtie2 -x /home/user/mapping/water/water_secondary_contigs_index --very-sensitive --end-to-end --no-unal -q --threads 20 -1 /home/user/database/A04_MIL_1_R1.fastq,/home/user/database/A04_MIN_2_R1.fastq,/home/user/database/D18_MAX_1_R1.fastq -2 /home/user/database/A04_MIL_1_R2.fastq,/home/user/database/A04_MIN_2_R2.fastq,/home/user/database/D18_MAX_1_R2.fastq -S water_RAW.sam; # Mapea los contigs contra los metagenomas
 samtools view -Sb water_RAW.sam -o water_RAW.bam # Comprime el SAM
 samtools sort -o water_SORTED.bam water_RAW.bam # Ordena el BAM
 rm *RAW*
@@ -266,9 +263,70 @@ cat /home/assemble/coassemble/water/water_secondary_contigs.fa |  megahit_toolki
 # Define como variables: los valores del parámetro de preferencia (-p) de Binsanity (1) y Binsanity-refine (2); el archivo BAM (3); los contigs a someter a binning (4); Número de núcleos a emplear (5).
 P1=-10; P2=-5; P3=-3; P4=-3; P5=-3; P6=-3; # 1
 R1=-25; R2=-25; R3=-25; R4=-25; R5=-25; R6=-10; R7=-3; # 2
-bam_file=water.bam; # 3
-fasta_file=water_contigs_min2000.fasta; # 4
+bam_file=water_SORTED.bam; # 3
+fasta_file=water_secondary_contigs_2k.fa; # 4
 NUCLEOS=20 # 5;
+
+# Genera los perfiles de cobertura y normaliza
+get-ids -f . -l $fasta_file -o contigs_IDs.txt;
+Binsanity-profile -i $fasta_file -s . --ids contigs_IDs.txt --transform scale -T $NUCLEOS -c contigs_coverage_profile;
+mkdir binsanity_profile_outs
+mv *readcounts* *saf* binsanity_profile_outs;
+
+##################### Binning 1
+Binsanity -f . -l $fasta_file -c *lognorm* -p $P1 -m 4000  -v 400 -d 0.95 --log PASS1-log.txt -o PASS1;
+cd PASS1 && find . -size 0 -delete;
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS1-%u" $num).fna";
+       num=$(($num+1));
+done
+checkm lineage_wf -x fna -t $NUCLEOS . PASS1-checkm > PASS1-checkm_out;
+checkm_analysis -checkM PASS1-checkm_out;
+for file in low_completion/*.fna; do
+        cat "$file" >> high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+ls -lh  * > renamed_merged_bins_info.txt
+cd high_redundancy
+find . -size 0 -delete
+
+##################### Refinamiento 1
+for file in *.fna; do
+        Binsanity-refine -c ../../*lognorm -f . -l "$file" -p $R1 --log PASS1-refine-log.txt -o ../../PASS1-refine;
+done
+cd ../../PASS1-refine && find . -size 0 -delete
+num=1; for file in *.fna; do
+       mv "$file" "$(printf "PASS1-refine-%u" $num).fna"
+       num=$(($num+1));
+done
+checkm lineage_wf -x fna -t $NUCLEOS .  PASS1-refine-checkm > PASS1-refine-checkm_out;
+checkm_analysis -checkM PASS1-refine-checkm_out
+for file in low_completion/*.fna; do
+        cat "$file" >>high_redundancy/low_completion.fna;
+done
+mv strain*/*.fna high_redundancy
+cd high_redundancy
+find . -size 0 -delete
+
+##################### Binning 2
+
+##################### Refinamiento 2
+
+##################### Binning 3
+##################### Refinamiento 3
+
+##################### Binning 4
+##################### Refinamiento 4
+
+##################### Binning 5
+##################### Refinamiento 5
+
+##################### Binning 6
+##################### Refinamiento 6
+
+##################### Refinamiento 7
+
+##################### Refinamiento 8
 
 ```
 
