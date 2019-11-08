@@ -54,6 +54,7 @@ Donde los números en rojo representan: (1) el lenguaje a usar, por ejemplo, si 
 
 Finalmente, una de las cosas que mas se hace en bioinformática es buscar respuestas en foros. Los foros mas comunes suelen ser GitHub, BioStars, Researchgate, Stackoverflow, Reddit, etc. Prácticamente cualquier búsqueda que realices seguirá las siguientes sintaxis: (1) What is …; (2) How to …; (3) Tool for …; por ejemplo: What is a kmer?, How to merge two tables in one?, Tools for genome annotation
 
+### Conceptos a investigar 
 1.	Repositorios científicos 
 2.	Unix, Linux, Bash 
 3.	MobaxTerm
@@ -71,9 +72,24 @@ Finalmente, una de las cosas que mas se hace en bioinformática es buscar respue
 15.	script
 16.	SheBang (como escribir un job/script)
 
+### Videos recomendados 
+¿Cómo funciona un procesador? - Desde un transistor hasta una CPU
+https://www.youtube.com/watch?v=-ZTekGoR8uQ&t
 
->https://www.youtube.com/watch?v=cMfDNkA5cVM
+¿Por qué AMD ha superado a intel? - La guerra de los núcleos
+https://www.youtube.com/watch?v=pQgWQ7X32Pw
 
+¿Por qué Linux no es Popular?
+https://www.youtube.com/watch?v=NDhJfHhe3e4&t
+
+100 MOTIVOS por los que estudiar INFORMATICA
+https://www.youtube.com/watch?v=CTazANzywSA
+
+¿Qué es el Machine Learning?¿Y Deep Learning? Un mapa conceptual 
+https://www.youtube.com/watch?v=KytW151dpqU
+
+Github tutorial
+https://www.youtube.com/watch?v=cMfDNkA5cVM
 
 
 
