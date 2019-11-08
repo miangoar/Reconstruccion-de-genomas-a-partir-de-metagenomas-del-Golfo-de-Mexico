@@ -246,7 +246,29 @@ ln -s /home/assemble/coassemble/sediments/sediment_secondary_contigs.fa sediment
 cd water 
 
 bowtie2-build *secondary_contigs.fa water_secondary_contigs_index # Preprocesamiento (indexar)
-bowtie2 -x /home/user/mapping/water/water_secondary_contigs_index --very-sensitive --end-to-end --no-unal -q --threads $CORES -1 $R1 -2 $R2 -S SAM_${file}.sam; # Mapea los contigs
+bowtie2 -x /home/user/mapping/water/water_secondary_contigs_index --very-sensitive --end-to-end --no-unal -q --threads 20 \
+-1 /home/user/database/A04_MIL_1_R1.fastq,/home/user/database/A04_MIN_2_R1.fastq,/home/user/database/D18_MAX_1_R1.fastq  \
+-2 /home/user/database/A04_MIL_1_R2.fastq,/home/user/database/A04_MIN_2_R2.fastq,/home/user/database/D18_MAX_1_R2.fastq \
+-S water_RAW.sam; # Mapea los contigs contra los metagenomas
+samtools view -Sb water_RAW.sam -o water_RAW.bam # Comprime el SAM
+samtools sort -o water_SORTED.bam water_RAW.bam # Ordena el BAM
+rm *RAW*
+# Realiza lo propio para los sedimentos 
+```
+
+Filtra el numero de contigs y realiza el binning
+```bash
+cd binning 
+mkdir water sediments && cd water 
+ln -s /home/user/mapping/water/water_SORTED.bam . 
+cat /home/assemble/coassemble/water/water_secondary_contigs.fa |  megahit_toolkit filterbylen 2000 > water_secondary_contigs_2k.fa
+
+# Define como variables: los valores del parámetro de preferencia (-p) de Binsanity (1) y Binsanity-refine (2); el archivo BAM (3); los contigs a someter a binning (4); Número de núcleos a emplear (5).
+P1=-10; P2=-5; P3=-3; P4=-3; P5=-3; P6=-3; # 1
+R1=-25; R2=-25; R3=-25; R4=-25; R5=-25; R6=-10; R7=-3; # 2
+bam_file=water.bam; # 3
+fasta_file=water_contigs_min2000.fasta; # 4
+NUCLEOS=20 # 5;
 
 ```
 
