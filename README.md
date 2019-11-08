@@ -91,17 +91,19 @@ https://www.youtube.com/watch?v=KytW151dpqU
 Github tutorial
 https://www.youtube.com/watch?v=cMfDNkA5cVM
 
+De ahora en adelante el símbolo “>” al inicio de la linea representa el despliegue de la información de la terminal.
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
 Ubica tu posición en el servidor y crea nuevos directorios
 ```bash
-$ pwd 
-/home/user/
-$ mkdir database reads assemble binnining rna_predition annotation scripts
+pwd 
+> /home/user/
+mkdir database reads assemble binnining rna_predition annotation scripts
 ```
 
 Asumimos que los seis metagenomas están en el directorio databases 
-Cd database && ls -lh 
+```bash
+cd database && ls -lh 
 total 213G
 -rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R1.fastq
 -rwxrwxr-x 1 lorenzo lorenzo  15G Aug 30  2018 A04_MIL_1_R2.fastq
@@ -115,13 +117,22 @@ total 213G
 -rwxrwxr-x 1 lorenzo lorenzo  29G Aug 30  2018 D18_SED_1_R2.fastq
 -rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R1.fastq
 -rwxrwxr-x 1 lorenzo lorenzo  22G Aug 30  2018 E03_SED010_1_R2.fastq
+```
 
-Evalúa la calidad de los reads usando stats.pl 
-Cd ../reads 
-Ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
-Paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
-Cp ../scripts /stats.pl . 
+Evalúa la calidad de los reads usando stats.pl
+```bash 
+$ cd ../reads 
+$ ls ../databases/*R1* > r1_reads.txt && ls ../databases/*R2* > r2_reads.txt
+$ paste r1_reads.txt r2_reads.txt > reads_list.txt  && rm r1_reads.txt r2_reads.txt
+$ cp ../scripts /stats.pl . 
+$ stats.pl reads_list.txt 
 
+$ ls 
+basic_stats_out.txt reads_list.txt stats.pl
+```
+“basic_stats_out.txt” contiene la información de la calidad de las secuencias 
+
+Evalúa la calidad de los reads usando FASSTQC
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
