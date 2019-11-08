@@ -100,7 +100,7 @@ Ubica tu posición en el servidor y crea nuevos directorios
 ```bash
 pwd 
 > /home/user/
-mkdir database reads assemble binnining rna_predition annotation scripts
+mkdir database reads assemble binnining rna_predition annotation mapping anvio
 ```
 
 Asumimos que los seis metagenomas están en el directorio databases 
@@ -151,7 +151,7 @@ Todos los archivos .report generados con Kraken2 contienen los reportes de la ta
 
 
 ![2](https://user-images.githubusercontent.com/51969194/68170109-1b206180-ff34-11e9-8b28-9d6ae64a2951.png)
-### Ensamble
+### Ensamble y coensamble
 Crea directorios para los metagenomas y ensambla los reads. Solo se ejemplifica como realizar el ensamble con Megahit (con sus tres presets) e IDBA-UD para el metagenoma A04MIL. Para el resto hay que modificar las rutas a los archivos.  
 ```bash
 cd ../assemble
@@ -214,7 +214,6 @@ cat *idba* > sediments_idba_primary_contigs.fa
 quast.py -o primary_contigs_stats_by_quast -m 0 -t 20 *primary*
 ```
 
-### Binning
 Con estos metagenomas, Megahit --present-sensitive tuvo un mejor rendimiento y por ello se trabaja con tales contigs. Crea directorios y ligas simbólicas para realizar el coensamble con Minimus2. 
 
 ```bash
@@ -237,9 +236,19 @@ cat *input_2_minimus2.fasta *input_2_minimus2.singletons.seq > water_secondary_c
 # Hacer lo propio para los contigs de sedimentos para generar un archivo sediment_secondary_contigs.fa
 ```
 
+### Binning
+Realiza el mapeo de los contigs a los reads para generar las coberturas con Bowtie2  
+```bash
+cd /home/user/mapping
+mkdir water sediments
+ln -s /home/assemble/coassemble/water/water_secondary_contigs.fa  water/
+ln -s /home/assemble/coassemble/sediments/sediment_secondary_contigs.fa sediments
+cd water 
 
+bowtie2-build *secondary_contigs.fa water_secondary_contigs_index # Preprocesamiento (indexar)
+bowtie2 -x /home/user/mapping/water/water_secondary_contigs_index --very-sensitive --end-to-end --no-unal -q --threads $CORES -1 $R1 -2 $R2 -S SAM_${file}.sam; # Mapea los contigs
 
-
+```
 
 
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
