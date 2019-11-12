@@ -511,7 +511,178 @@ checkm lineage_wf -x fna -t $NUCLEOS . high-redundancy-checkm > high-redundancy-
 
 
 ![3](https://user-images.githubusercontent.com/51969194/68170106-1a87cb00-ff34-11e9-8cc8-003459b94f6f.png)
+
+### Predicción de RNAs (sRNA y tRNA)  
+
+5S sRNA
+Family: 5S_rRNA (RF00001) -> Es el mismo para ambos (?)
+
+16S sRNA
+Family: LSU_rRNA_bacteria (RF02541)
+Family: LSU_rRNA_archaea (RF02540)
+
+23S sRNA
+Family: SSU_rRNA_bacteria (RF00177)
+Family: SSU_rRNA_archaea (RF01959)
+
+Clasifica los MAGs de acuerdo con su fracción de procedentica (sedimentos o agua) y dominio (bacteria o arquea) en sus respectivos directorios y ejecuta los scripts escritos por Alexandre Almeida.  
+
+for file in *.fna; do
+  /home/gama/recursos/MGS-gut/RNA-detect-suite/RNA_detect_4_Bac_n_Arch/RNA_detect_archaea.sh  $file
+done
+
+mkdir  sRNAs tRNAs  sRNAs/sequences
+
+mv *_tRNA_20aa.out tRNAs
+mv *_rRNAs.out sRNAs
+mv *_rRNAs.fasta sRNAs/sequences
+
+cd tRNAs
+cat *20aa.out >> all_MAGs_tRNAs.txt
+cd ../sRNAs
+cat *rRNAs.out >> all_MAGs_sRNAs.txt
+cd ../
+
+
+for file in *.fna; do
+  /home/gama/recursos/MGS-gut/RNA-detect-suite/RNA_detect_4_Bac_n_Arch/RNA_detect_bacteria.sh  $file
+done
+mkdir  sRNAs tRNAs  sRNAs/sequences
+mv *_tRNA_20aa.out tRNAs
+mv *_rRNAs.out sRNAs
+mv *_rRNAs.fasta sRNAs/sequences
+cd tRNAs
+cat *20aa.out >> all_MAGs_tRNAs.txt
+cd ../sRNAs
+cat *rRNAs.out >> all_MAGs_sRNAs.txt
+cd ../
+
+
+### Clasificación taxonómica 
+
+gtdbtk classify_wf --genome_dir all_MAGs/ --out_dir GTDB_Taxonomy_classWF --cpus 25
+
+only MAGs 
+GToTree -f my_28_MAG.txt -H /home/install/GToTree-1.4.2/hmm_sets/Bacteria_and_Archaea.hmm -N -j 20 -n 4 -o ONLY_MAGs
+
+GToTree -f my_10_MAG_SELECTED.txt -a MAG_ref_accessions.txt -H /home/install/GToTree-1.4.2/hmm_sets/Bacteria_and_Archaea.hmm -p pfam_accesions.txt -j 20 -n 4 -t -L Domain\,Phylum\,Class\,Species -o FINAL_TREE
+
+.tre -> iTol 
+https://gtdb.ecogenomic.org/ 
+https://itol.embl.de/
+
+
+### Cobertura en los metagenomas y anotación 
+
+Evalúa la cobertura de los MAGs con Anvi’o utilizando el pipeline metagenómico 
+anvi-run-workflow -w metagenomics -c config.json 
+
+config.json
 ```bash
+{
+    "samples_txt": "samples.txt",
+    "fasta_txt": "fasta.txt",
+    "references_mode": true,
+    "import_percent_of_reads_mapped": {
+        "run": false
+    },
+    "bowtie": {
+        "additional_params": "--no-unal",
+        "threads": 4
+    },
+    "anvi_profile": {
+        "--overwrite-output-destinations": true,
+        "--min-contig-length": 0,
+        "--profile-SCVs": true,
+        "--skip-SNV-profiling": false,
+        "threads": 4
+    },
+    "anvi_script_reformat_fasta": {
+        "run": true
+    },
+    "anvi_run_ncbi_cogs": {
+        "run": true,
+        "threads": 15
+    },
+    "output_dirs": {
+        "FASTA_DIR": "02_FASTA",
+        "LOGS_DIR": "00_LOGS",
+        "QC_DIR": "01_QC",
+        "PROFILE_DIR": "05_ANVIO_PROFILE",
+        "MERGE_DIR": "06_MERGED",
+        "MAPPING_DIR": "04_MAPPING",
+        "CONTIGS_DIR": "03_CONTIGS"
+    },
+    "anvi_run_hmms": {
+        "run": false
+    },
+    "iu_filter_quality_minoche": {
+        "run": false
+    },
+    "anvi_merge": {
+        "--skip-concoct-binning": true
+    }
+}
 ```
-## :v a prro 
+
+fasta.txt
+```bash
+reference       path
+PASS1_11        /dos/gama/tesis_lic_gama/mapping/anvio/PASS1_11.fa
+PASS1_refine_69 /dos/gama/tesis_lic_gama/mapping/anvio/PASS1_refine_69.fa
+PASS1_refine_95 /dos/gama/tesis_lic_gama/mapping/anvio/PASS1_refine_95.fa
+PASS1_refine_97 /dos/gama/tesis_lic_gama/mapping/anvio/PASS1_refine_97.fa
+PASS1_refine_98 /dos/gama/tesis_lic_gama/mapping/anvio/PASS1_refine_98.fa
+```
+samples.txt
+```bash
+sample  r1      r2
+A04_MIL /home/samples/CIGoM/A04_MIL_1_R1.fastq  /home/samples/CIGoM/A04_MIL_1_R2.fastq
+A04_MIN /home/samples/CIGoM/A04_MIN_2_R1.fastq  /home/samples/CIGoM/A04_MIN_2_R2.fastq
+D18_MAX /home/samples/CIGoM/D18_MAX_1_R1.fastq  /home/samples/CIGoM/D18_MAX_1_R2.fastq
+```
+
+Exporta las secuencias de aminoácidos de los MAGs con Anvi’o para que las anotaciones sean compatibles  
+```bash
+anvi-get-sequences-for-gene-calls -c  03_CONTIGS/PASS1_11-contigs.db --get-aa-sequences -o PASS1_11_protein.fa
+
+# Enviar los MAGs al servidor de GhostKOALA con la base de datos genus_prokaryotes https://www.kegg.jp/ghostkoala/
+head KEGG_PASS1-11.txt
+genecall_0
+genecall_1      K00338
+genecall_2      K00337
+genecall_3      K00333
+genecall_4      K00332
+genecall_5      K00331
+
+
+# Importa a anvio
+KEGG-to-anvio --KeggDB ~gama/bin/GhostKoalaParser/samples/KO_Orthology_ko00001.txt -i ../KEGG_PASS1-11.txt -o KEGG_PASS1-11_AnviImportable.txt
+anvi-import-functions -c ../../03_CONTIGS/PASS1_11-contigs.db -i KEGG_PASS1-11_AnviImportable.txt
+
+# Pfam annotation 
+for file in 03_CONTIGS/*.db; do
+  anvi-run-pfams -c $file --pfam-data-dir /Database/Anvio/pfam -T 20
+ done 
+
+### KEHH decoder heatmap 
+KEGG-decoder -i ../inputs/KEGG_PASS1-11.txt -o FUNCTION_OUT_PASS1-11.list -v static
+mv function_heatmap.svg decoder_PASS1-11.svg
+
+KEGG-decoder  -i KEGG_PASS1-11.txt -o KEGG_PASS1-11_function.list -v static
+mv function_heatmap.svg  PASS1-11.svg
+
+hmmsearch --tblout PASS1_11_expanderv0.3.tbl -T 75 ~gama/bin/BioData/KEGGDecoder/HMM_Models/expander_dbv0.6.hmm ../../MAG_genes/PASS1_11-contigs.db_genes.fa
+
+Decode_and_Expand.py ../decoder/FUNCTION_OUT_PASS1-11.list ../expand/HMM_OUT_PASS1_11.list
+ mv decode-expand_heatmap.svg decode-expand_heatmap_PASS1_11.svg
+ 
+ anvi-interactive -p 06_MERGED/PASS1_refine_97/PROFILE.db -c 03_CONTIGS/PASS1_refine_97-contigs.db
+```
+
+
+
+
+
+
 
