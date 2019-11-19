@@ -530,25 +530,10 @@ Family: SSU_rRNA_archaea (RF01959)
 
 Clasifica los MAGs de acuerdo con su fracción de procedentica (sedimentos o agua) y dominio (bacteria o arquea) en sus respectivos directorios y ejecuta los scripts escritos por Alexandre Almeida.  
 
+```bash
+# Para genomas de arqueas
 for file in *.fna; do
-  /home/gama/recursos/MGS-gut/RNA-detect-suite/RNA_detect_4_Bac_n_Arch/RNA_detect_archaea.sh  $file
-done
-
-mkdir  sRNAs tRNAs  sRNAs/sequences
-
-mv *_tRNA_20aa.out tRNAs
-mv *_rRNAs.out sRNAs
-mv *_rRNAs.fasta sRNAs/sequences
-
-cd tRNAs
-cat *20aa.out >> all_MAGs_tRNAs.txt
-cd ../sRNAs
-cat *rRNAs.out >> all_MAGs_sRNAs.txt
-cd ../
-
-
-for file in *.fna; do
-  /home/gama/recursos/MGS-gut/RNA-detect-suite/RNA_detect_4_Bac_n_Arch/RNA_detect_bacteria.sh  $file
+  RNA_detect_archaea.sh  $file
 done
 mkdir  sRNAs tRNAs  sRNAs/sequences
 mv *_tRNA_20aa.out tRNAs
@@ -560,9 +545,23 @@ cd ../sRNAs
 cat *rRNAs.out >> all_MAGs_sRNAs.txt
 cd ../
 
+# Para genomas de bacterias
+for file in *.fna; do
+  RNA_detect_bacteria.sh  $file
+done
+mkdir  sRNAs tRNAs  sRNAs/sequences
+mv *_tRNA_20aa.out tRNAs
+mv *_rRNAs.out sRNAs
+mv *_rRNAs.fasta sRNAs/sequences
+cd tRNAs
+cat *20aa.out >> all_MAGs_tRNAs.txt
+cd ../sRNAs
+cat *rRNAs.out >> all_MAGs_sRNAs.txt
+cd ../
+```
 
 ### Clasificación taxonómica 
-
+```bash
 gtdbtk classify_wf --genome_dir all_MAGs/ --out_dir GTDB_Taxonomy_classWF --cpus 25
 
 only MAGs 
@@ -574,6 +573,7 @@ GToTree -f my_10_MAG_SELECTED.txt -a MAG_ref_accessions.txt -H /home/install/GTo
 https://gtdb.ecogenomic.org/ 
 https://itol.embl.de/
 
+```
 
 ### Cobertura en los metagenomas y anotación 
 
@@ -682,7 +682,7 @@ Decode_and_Expand.py ../decoder/FUNCTION_OUT_PASS1-11.list ../expand/HMM_OUT_PAS
  
  anvi-interactive -p 06_MERGED/PASS1_refine_97/PROFILE.db -c 03_CONTIGS/PASS1_refine_97-contigs.db
 ```
-b
+
 
 
 
