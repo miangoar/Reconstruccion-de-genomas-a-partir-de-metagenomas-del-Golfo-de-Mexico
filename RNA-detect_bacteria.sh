@@ -1,4 +1,5 @@
 #!/bin/bash
+# Written by Alex. Almeida https://www.ebi.ac.uk/about/people/alexandre-almeida
 
 if [ $# -eq 0 ]; then
     echo "usage: RNA-detect.sh in.fasta"
