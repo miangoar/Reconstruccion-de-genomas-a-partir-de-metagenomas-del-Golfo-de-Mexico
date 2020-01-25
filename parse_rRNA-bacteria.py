@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# Written by Alex. Almeida https://www.ebi.ac.uk/about/people/alexandre-almeida
 
 import os
 import sys
