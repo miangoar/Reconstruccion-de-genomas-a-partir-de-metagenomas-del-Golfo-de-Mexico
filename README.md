@@ -93,6 +93,8 @@ https://www.youtube.com/watch?v=KytW151dpqU
 Github tutorial
 https://www.youtube.com/watch?v=cMfDNkA5cVM
 
+Como las maquinas interpretan el código?
+https://www.youtube.com/watch?v=QXjU9qTsYCc
 
 
 ![1](https://user-images.githubusercontent.com/51969194/68170108-1b206180-ff34-11e9-8f7d-0fe1dc27301f.png)
