@@ -8,9 +8,10 @@ Aquí se describen todos los comandos realizados en la tesis de licenciatura **"
 Una breve introducción a la reconstrucción y análisis de genomas a partir de metagenomas se presenta en el siguiente webinar dentro del canal de YouTube de la consultora bioinformática Winter Genomics 
 https://youtu.be/ckIbT93Qhjc
 
-(https://github.com/miangoar/Reconstruccion-de-genomas-a-partir-de-metagenomas-del-Golfo-de-Mexico/blob/master/Figuras%20y%20tablas/Webinar.png)
+![dir](https://github.com/miangoar/Reconstruccion-de-genomas-a-partir-de-metagenomas-del-Golfo-de-Mexico/blob/master/Figuras%20y%20tablas/Webinar.png)
 
-El acceso y uso de las diapositivas es libre en el siguiente link https://drive.google.com/file/d/1M-mvBfLaH0nd6ELYtAfsOgbAjpA0i25h/view?usp=sharing 
+El acceso y uso de las diapositivas es libre en el siguiente link:
+https://drive.google.com/file/d/1M-mvBfLaH0nd6ELYtAfsOgbAjpA0i25h/view?usp=sharing 
 
 ![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
 
