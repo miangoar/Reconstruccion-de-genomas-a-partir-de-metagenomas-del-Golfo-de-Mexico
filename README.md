@@ -1,7 +1,7 @@
 ![Barra](https://user-images.githubusercontent.com/51969194/68169367-74d35c80-ff31-11e9-87e3-6dd06aa1737d.png)
 
 # Reconstrucción de genomas a partir de metagenomas del Golfo de México
-Aquí se describen todos los comandos realizados en la tesis de licenciatura **"Reconstrucción de genomas a partir de metagenomas del Golfo de México"**, *disponible* en: :v
+Aquí se describen todos los comandos realizados en la tesis de licenciatura **"Reconstrucción de genomas a partir de metagenomas del Golfo de México"**, *disponible* en repositorio de tesis de la UNAM: http://oreon.dgbiblio.unam.mx/F/1RJEX8PXL3M1CTDGSHAKXKXETJNSEQJQBNI3I94SHSCP1HN6JK-39822?func=full-set-set&set_number=034192&set_entry=000003&format=999
 
                Autor: Miguel Ángel González Arias (GAMA)                             Año: 2019
                     
@@ -519,7 +519,7 @@ checkm lineage_wf -x fna -t $NUCLEOS . high-redundancy-checkm > high-redundancy-
 ### Predicción de RNAs (sRNA y tRNA)  
 
 5S sRNA
-Family: 5S_rRNA (RF00001) -> Es el mismo para ambos (?)
+Family: 5S_rRNA (RF00001) 
 
 16S sRNA
 Family: LSU_rRNA_bacteria (RF02541)
