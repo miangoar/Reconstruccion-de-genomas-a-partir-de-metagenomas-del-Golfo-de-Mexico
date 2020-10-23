@@ -5,7 +5,9 @@ Aquí se describen todos los comandos realizados en la tesis de licenciatura **"
 
                Autor: Miguel Ángel González Arias (GAMA)                             Año: 2019
                     
-                    
+Una breve introducción a la reconstrucción y análisis de genomas a partir de metagenomas se presenta en el siguiente webinar dentro del canal de YouTube de la consultora bioinformática Winter Genomics 
+https://youtu.be/ckIbT93Qhjc
+
 ![0_1](https://user-images.githubusercontent.com/51969194/68175336-7e1af400-ff46-11e9-9d40-f3f6bf402ca3.png)
 
 Este repositorio está dirigido principalmente a quien no tiene experiencia previa en bioinformática, así como a aquellos interesados en los comandos implementados en la realización de mi tesis de licenciatura. Si bien no soy un experto, este recurso podría servirte para aclarar introducirte a la bioinformática, conocer algunos conceptos básicos, ahorrarte tiempo, reproducir y/o adaptar los análisis realizados en tus proyectos. Si ya tienes experiencia en el tema, puedes saltar directamente a las secciones de análisis para ver los comandos; si detectas errores, tienes dudas o quieres contribuir en este repositorio contáctame en 
