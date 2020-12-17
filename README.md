@@ -3,7 +3,7 @@
 # Reconstrucción de genomas a partir de metagenomas del Golfo de México
 Aquí se describen todos los comandos realizados en la tesis de licenciatura **"Reconstrucción de genomas a partir de metagenomas del Golfo de México"**, *disponible* en repositorio de tesis de la UNAM: http://132.248.9.195/ptd2020/octubre/0804398/Index.html
 
-               Autor: Miguel Ángel González Arias (GAMA)                             Año: 2019
+               Autor: Miguel Ángel González Arias (GAMA)                             Año: 2020
                     
 Una breve introducción a la reconstrucción y análisis de genomas a partir de metagenomas se presenta en el siguiente webinar dentro del canal de YouTube de la consultora bioinformática Winter Genomics 
 https://youtu.be/ckIbT93Qhjc
